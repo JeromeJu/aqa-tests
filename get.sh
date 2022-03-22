@@ -594,12 +594,12 @@ testJavaVersion()
 		_java=${TEST_JDK_HOME}/build/bin/java
 		_release=${TEST_JDK_HOME}/build/release
 	fi
+	echo "TEST_JDK_HOME=${TEST_JDK_HOME}" > ${TESTDIR}/job.properties
 	if [ -x ${_java} ]; then
 		echo "Run ${_java} -version"
 		echo "=JAVA VERSION OUTPUT BEGIN="
 		${_java} -version
 		echo "=JAVA VERSION OUTPUT END="
-		echo "TEST_JDK_HOME=${TEST_JDK_HOME}" > ${TESTDIR}/job.properties
 		if [ -e ${_release} ]; then
 			echo "=RELEASE INFO BEGIN="
 			cat ${_release}
