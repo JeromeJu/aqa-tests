@@ -594,8 +594,9 @@ testJavaVersion()
 		_java=${TEST_JDK_HOME}/build/bin/java
 		_release=${TEST_JDK_HOME}/build/release
 	fi
-	if [ $os != "windows"]:
+	if [ $os != "windows"]; then
 		echo "TEST_JDK_HOME=${TEST_JDK_HOME}" > ${TESTDIR}/job.properties
+	fi
 	if [ -x ${_java} ]; then
 		echo "Run ${_java} -version"
 		echo "=JAVA VERSION OUTPUT BEGIN="
