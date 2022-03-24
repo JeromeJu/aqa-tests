@@ -697,7 +697,10 @@ def post(output_name) {
 			archiveFile("aqa-tests/TKG/AQACert.log")
 			// TODO 1 create a Tap folder, and archive to it.
 			// uploadToArtifactory("${env.WORKSPACE}/'aqa-tests/TAP'")
-			archiveFile("TAP/test.txt")
+			// archiveFile("TAP/test.txt")
+			dir("aqa-test/"){
+				sh "mkdir -p TAP"
+			}
 
 
 			if (env.BUILD_LIST.startsWith('jck')) {
