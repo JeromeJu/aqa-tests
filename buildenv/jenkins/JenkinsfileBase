@@ -698,7 +698,7 @@ def post(output_name) {
 			// TODO 1 create a Tap folder, and archive to it.
 			def pattern = "${env.WORKSPACE}/'aqa-tests/TAP'"
 			uploadToArtifactory(pattern)
-			archiveFile("aqa-tests/TAP**/*.tap")
+			archiveFile("aqa-tests/TAP/**/*.tap")
 
 
 			if (env.BUILD_LIST.startsWith('jck')) {
