@@ -698,9 +698,7 @@ def post(output_name) {
 			// TODO 1 create a Tap folder, and archive to it.
 			// uploadToArtifactory("${env.WORKSPACE}/'aqa-tests/TAP'")
 			// archiveFile("TAP/test.txt")
-			dir("aqa-tests/"){
-				sh "mkdir -p TAP"
-			}
+			sh "mkdir -p aqa-tests/TAP"
 			archiveFile("aqa-tests/TAP/test.txt")
 			// copy tap to TAP/
 
