@@ -701,6 +701,9 @@ def post(output_name) {
 			dir("aqa-test/"){
 				sh "mkdir -p TAP"
 			}
+			archiveFile("aqa-tests/TAP/test.txt")
+			// copy tap to TAP/
+
 
 
 			if (env.BUILD_LIST.startsWith('jck')) {
