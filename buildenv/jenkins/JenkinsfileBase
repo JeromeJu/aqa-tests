@@ -695,7 +695,7 @@ def post(output_name) {
 			archiveFile("aqa-tests/testenv/testenv.properties")
 			archiveFile("aqa-tests/TKG/SHA.txt")
 			archiveFile("aqa-tests/TKG/AQACert.log")
-			archiveFile("**/*.tap")
+			archiveFile("Tap")
 
 			if (env.BUILD_LIST.startsWith('jck')) {
 				xunit (
