@@ -601,6 +601,8 @@ testJavaVersion()
 		${_java} -version
 		echo "=JAVA VERSION OUTPUT END="
 		TEST_JDK_HOME = cygpath -w ${TEST_JDK_HOME}
+		echo "TESTING"
+		echo ${TEST_JDK_HOME}
 		echo "TEST_JDK_HOME=${TEST_JDK_HOME}" > ${TESTDIR}/job.properties
 		if [ -e ${_release} ]; then
 			echo "=RELEASE INFO BEGIN="
