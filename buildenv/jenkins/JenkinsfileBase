@@ -474,7 +474,7 @@ def getJobProperties() {
 		echo "readProperties file: ${jobProperties}"
 		def properties = readProperties file: "${jobProperties}"
 		if (properties.TEST_JDK_HOME) {
-			env.TEST_JDK_HOME = cygpath -w properties.TEST_JDK_HOME
+			env.TEST_JDK_HOME = sh cygpath -w properties.TEST_JDK_HOME
 			echo "Set TEST_JDK_HOME to ${TEST_JDK_HOME}"
 		} else {
 			error("Cannot find TEST_JDK_HOME in ${jobProperties}")
