@@ -602,7 +602,7 @@ testJavaVersion()
 		if [ $os != "windows"]; then
 			echo "TEST_JDK_HOME=${TEST_JDK_HOME}" > ${TESTDIR}/job.properties
 		else
-			echo "TEST_JDK_HOME=$(cygpath -w '${TEST_JDK_HOME}')" > ${TESTDIR}/job.properties
+			echo "TEST_JDK_HOME=$(cygpath -w ${TEST_JDK_HOME})" > ${TESTDIR}/job.properties
 		fi
 		if [ -e ${_release} ]; then
 			echo "=RELEASE INFO BEGIN="
