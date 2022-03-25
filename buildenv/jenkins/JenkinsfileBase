@@ -692,19 +692,28 @@ def post(output_name) {
 			junit allowEmptyResults: true, keepLongStdio: true, testResults: '**/work/**/*.jtr.xml, **/junitreports/**/*.xml, **/external_test_reports/**/*.xml'
 
 			//call the archive function for each file
-			archiveFile("aqa-tests/testenv/testenv.properties")
-			archiveFile("aqa-tests/TKG/SHA.txt")
-			archiveFile("aqa-tests/TKG/AQACert.log")
+			// archiveFile("aqa-tests/testenv/testenv.properties")
+			// archiveFile("aqa-tests/TKG/SHA.txt")
+			// archiveFile("aqa-tests/TKG/AQACert.log")
 			// TODO 1 create a Tap folder, and archive to it.
 			// sh "printenv"
-			archiveFile("**/*.tap")
+			// archiveFile("**/*.tap")
 			def tapFiles = findFiles(glob: "**/*.tap")
-			dir('aqa-tests') {
+			for (def tapFile: tapFiles) {
 				sh "cp -f ${tapFiles} aqa-tests/TAP"
-				archiveFile('aqa-tests/TAP/test.txt')
+				try {
+					archiveFile('aqa-tests/TAP/**/*.tap')
+					
+				} catch (Exception e) {
+					echo e
+				}
+				try {
+					archiveFile('aqa-tests/TAP/*.tap')
+					
+				} catch (Exception e) {
+					echo e
+				}
 				
-				sh 'pwd'
-			}
 
 
 			// TODO put **/*.tap under TAP
