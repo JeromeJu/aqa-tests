@@ -700,6 +700,7 @@ def post(output_name) {
 			// archiveFile("**/*.tap")
 			def tapFiles = findFiles(glob: "**/*.tap")
 			for (def tapFile: tapFiles) {
+				sh "cp -f ${tapFile} aqa-tests/TAP"
 				try {
 					archiveFile('aqa-tests/TAP/**/*.tap')
 					
