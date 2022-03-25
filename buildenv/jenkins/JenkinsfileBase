@@ -715,7 +715,11 @@ def post(output_name) {
 				}
 			}
 			def peekFiles = findFiles(glob: 'aqa-tests/TAP/*.tap')
-			echo peekFiles
+			for (def f: peekFiles) {
+				echo f
+				echo "TEST"
+			}
+
 
 
 
