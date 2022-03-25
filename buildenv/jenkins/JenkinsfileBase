@@ -696,13 +696,15 @@ def post(output_name) {
 			archiveFile("aqa-tests/TKG/SHA.txt")
 			archiveFile("aqa-tests/TKG/AQACert.log")
 			// TODO 1 create a Tap folder, and archive to it.
-			sh "printenv"
+			// sh "printenv"
 
 			dir('aqa-tests') {
-				archiveFile('TAP/test.txt')
 				sh 'mkdir "/aqa-tests/TAP"'
+				archiveFile('TAP/test.txt')
+				
 				sh 'pwd'
 			}
+			archiveFile("**/*.tap")
 
 			// TODO put **/*.tap under TAP
 
