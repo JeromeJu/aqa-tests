@@ -700,8 +700,6 @@ def post(output_name) {
 			archiveFile("**/*.tap")
 			def tapFiles = findFiles(glob: "**/*.tap")
 			dir('aqa-tests') {
-
-				sh 'mkdir "/TAP"'
 				sh "cp -f **/*.tap aqa-tests/TAP"
 				archiveFile('aqa-tests/TAP/test.txt')
 				
