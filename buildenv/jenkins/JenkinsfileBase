@@ -714,9 +714,8 @@ def post(output_name) {
 					echo e
 				}
 			}
-			dir ('aqa-test/TAP') {
-				sh "ls"
-			}
+			def peekFiles = findFiles(glob: 'aqa-tests/TAP/*.tap')
+			echo peekFiles
 
 
 
