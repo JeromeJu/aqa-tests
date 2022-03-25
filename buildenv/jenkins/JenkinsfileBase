@@ -698,18 +698,18 @@ def post(output_name) {
 			// TODO 1 create a Tap folder, and archive to it.
 			sh "printenv"
 
-			// File newDirectoryStructureParent = new File('aqa-tests')
-			// def s = 'repo/dir/file.java'
-			// def newContainer = new File(s, newDirectoryStructureParent).getParent()
-			// newContainer.mkdirs()
+			File newDirectoryStructureParent = new File('aqa-tests')
+			def s = 'TAP/test.txt'
+			def newContainer = new File(s, newDirectoryStructureParent).getParent()
+			newContainer.mkdirs()
 
 			// File workspace = new File("${env.WORKSPACE}")
     			// workspace.mkdirs()
 			// sh "mkdir -p ${TEST_ROOT}/TAP"
+			// TODO put **/*.tap under TAP
 
-			// archiveFile("aqa-tests/TKG/test.txt")
-			// uploadToArtifactory("${env.WORKSPACE}/'aqa-tests/TAP'")
-			// archiveFile("aqa-tests/TAP/test.txt")
+			archiveFile("aqa-tests/TKG/test.txt")
+
 			// sh "mkdir -p aqa-tests/TAP"
 			// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"aqa-tests/TAP")
 			// archiveFile("aqa-tests/TAP/**/*.tap")
