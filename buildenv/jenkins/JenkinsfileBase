@@ -696,11 +696,11 @@ def post(output_name) {
 			archiveFile("aqa-tests/TKG/SHA.txt")
 			archiveFile("aqa-tests/TKG/AQACert.log")
 			// TODO 1 create a Tap folder, and archive to it.
-			// uploadToArtifactory("${env.WORKSPACE}/'aqa-tests/TAP'")
-			// archiveFile("TAP/test.txt")
-			sh "mkdir -p aqa-tests/TAP"
-			copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"aqa-tests/TAP")
-			archiveFile("aqa-tests/TAP/**/*.tap")
+			uploadToArtifactory("${env.WORKSPACE}/'aqa-tests/TAP'")
+			archiveFile("TAP/test.txt")
+			// sh "mkdir -p aqa-tests/TAP"
+			// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"aqa-tests/TAP")
+			// archiveFile("aqa-tests/TAP/**/*.tap")
 			// copy tap to TAP/
 
 
