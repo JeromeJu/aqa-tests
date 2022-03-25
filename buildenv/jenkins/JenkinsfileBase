@@ -698,14 +698,10 @@ def post(output_name) {
 			// TODO 1 create a Tap folder, and archive to it.
 			sh "printenv"
 
-			File newDirectoryStructureParent = new File('aqa-tests')
-			def s = 'TAP/test.txt'
-			def newContainer = new File(s, newDirectoryStructureParent).getParent()
-			newContainer.mkdirs()
+			dir('aqa-tests') {
+				archiveFile('test.txt')
+			}
 
-			// File workspace = new File("${env.WORKSPACE}")
-    			// workspace.mkdirs()
-			// sh "mkdir -p ${TEST_ROOT}/TAP"
 			// TODO put **/*.tap under TAP
 
 			archiveFile("aqa-tests/TKG/test.txt")
