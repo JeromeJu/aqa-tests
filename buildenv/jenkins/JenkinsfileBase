@@ -697,28 +697,28 @@ def post(output_name) {
 			// archiveFile("aqa-tests/TKG/AQACert.log")
 			// TODO 1 create a Tap folder, and archive to it.
 			// sh "printenv"
-			// archiveFile("**/*.tap")
-			def tapFiles = findFiles(glob: "**/*.tap")
-			for (def tapFile: tapFiles) {
-				sh "cp -f ${tapFile} aqa-tests/TAP"
-				try {
-					archiveFile('aqa-tests/TAP/**/*.tap')
+			archiveFile("**/*.tap")
+			// def tapFiles = findFiles(glob: "**/*.tap")
+			// for (def tapFile: tapFiles) {
+			// 	sh "cp -f ${tapFile} aqa-tests/TAP"
+			// 	try {
+			// 		archiveFile('aqa-tests/TAP/**/*.tap')
 					
-				} catch (Exception e) {
-					echo e
-				}
-				try {
-					archiveFile('aqa-tests/TAP/*.tap')
+			// 	} catch (Exception e) {
+			// 		echo e
+			// 	}
+			// 	try {
+			// 		archiveFile('aqa-tests/TAP/*.tap')
 					
-				} catch (Exception e) {
-					echo e
-				}
-			}
-			def peekFiles = findFiles(glob: 'aqa-tests/TAP/*.tap')
-			for (def f: peekFiles) {
-				echo f
-				echo "TEST"
-			}
+			// 	} catch (Exception e) {
+			// 		echo e
+			// 	}
+			// }
+			// def peekFiles = findFiles(glob: 'aqa-tests/TAP/*.tap')
+			// for (def f: peekFiles) {
+			// 	echo f
+			// 	echo "TEST"
+			// }
 
 
 
