@@ -696,12 +696,20 @@ def post(output_name) {
 			archiveFile("aqa-tests/TKG/SHA.txt")
 			archiveFile("aqa-tests/TKG/AQACert.log")
 			// TODO 1 create a Tap folder, and archive to it.
-			dir ("aqa-tests") {
-				sh "mkdir -p aqa-tests/TAP"
-			}
-			archiveFile("aqa-tests/TKG/test.txt")
-			uploadToArtifactory("${env.WORKSPACE}/'aqa-tests/TAP'")
-			archiveFile("aqa-tests/TAP/test.txt")
+			sh "printenv"
+
+			// File newDirectoryStructureParent = new File('aqa-tests')
+			// def s = 'repo/dir/file.java'
+			// def newContainer = new File(s, newDirectoryStructureParent).getParent()
+			// newContainer.mkdirs()
+
+			// File workspace = new File("${env.WORKSPACE}")
+    			// workspace.mkdirs()
+			// sh "mkdir -p ${TEST_ROOT}/TAP"
+
+			// archiveFile("aqa-tests/TKG/test.txt")
+			// uploadToArtifactory("${env.WORKSPACE}/'aqa-tests/TAP'")
+			// archiveFile("aqa-tests/TAP/test.txt")
 			// sh "mkdir -p aqa-tests/TAP"
 			// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"aqa-tests/TAP")
 			// archiveFile("aqa-tests/TAP/**/*.tap")
