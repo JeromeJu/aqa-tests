@@ -699,12 +699,14 @@ def post(output_name) {
 			sh "printenv"
 
 			dir('aqa-tests') {
-				archiveFile('test.txt')
+				archiveFile('TAP/test.txt')
+				sh 'mkdir "/aqa-tests/TAP"'
+				sh 'pwd'
 			}
 
 			// TODO put **/*.tap under TAP
 
-			archiveFile("aqa-tests/TKG/test.txt")
+
 
 			// sh "mkdir -p aqa-tests/TAP"
 			// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"aqa-tests/TAP")
