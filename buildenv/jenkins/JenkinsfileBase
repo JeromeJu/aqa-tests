@@ -696,24 +696,9 @@ def post(output_name) {
 			// archiveFile("aqa-tests/TKG/SHA.txt")
 			// archiveFile("aqa-tests/TKG/AQACert.log")
 			// TODO 1 create a Tap folder, and archive to it.
-			// sh "printenv"
-
-			archiveFile("TKG/**/*.tap")
-
-			// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"${name}/${buildId}")
-							
-
-
-
-			// TODO put **/*.tap under TAP
-
-
-
-			// sh "mkdir -p aqa-tests/TAP"
-			// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"aqa-tests/TAP")
-			// archiveFile("aqa-tests/TAP/**/*.tap")
 			// copy tap to TAP/
 
+			archiveFile("aqa-tests/TKG/**/*.tap")
 
 
 			if (env.BUILD_LIST.startsWith('jck')) {
