@@ -698,9 +698,10 @@ def post(output_name) {
 			// TODO 1 create a Tap folder, and archive to it.
 			// sh "printenv"
 
-			archiveFile("${name}/${buildId}/**/*.tap")
+			archiveFile("TKG/**/*.tap")
 
-
+			// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"${name}/${buildId}")
+							
 
 
 
