@@ -1029,7 +1029,7 @@ def run_parallel_tests() {
 					echo "set build status to ${buildResult}"
 					currentBuild.result = buildResult
 				}
-				archiveFile("**/*.tap")
+				archiveFile("${WORKSPACE}/**/*.tap")
 				addFailedTestsGrinderLink()
 			}
 		}
