@@ -601,7 +601,6 @@ testJavaVersion()
 		echo "=JAVA VERSION OUTPUT END="
 		if [ "$os" = "windows" ]; then
 			TEST_JDK_HOME=$(cygpath -w "${TEST_JDK_HOME}")
-			for 
 		fi
 		echo ${TEST_JDK_HOME}
 		echo -E "TEST_JDK_HOME=${TEST_JDK_HOME}" > ${TESTDIR}/job.properties | sed 's/\\/\\\\/g'
