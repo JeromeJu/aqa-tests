@@ -1027,7 +1027,8 @@ def run_parallel_tests() {
 					currentBuild.result = buildResult
 				}
 				archiveFile("**/*.tap")
-				def files = currentbuild.getArtifacts()
+				echo UPSTREAM_JOB_NUMBER
+				def files = UPSTREAM_JOB_NAME.getArtifacts()
 				echo files
 				addFailedTestsGrinderLink()
 			}
