@@ -82,7 +82,7 @@ def setupEnv() {
 	ITERATIONS = params.ITERATIONS ? "${params.ITERATIONS}".toInteger() : 1
 
 	echo UPSTREAM_JOB_NUMBER
-	def files = UPSTREAM_JOB_NAME.getArtifacts()
+	def files = currentBuild.getArtifacts()
 	echo files
 
 	if (params.CODE_COVERAGE) {
@@ -135,7 +135,7 @@ def setupEnv() {
 def setupParallelEnv() {
 	stage('setupParallelEnv') {
 		timestamps{
-			
+
 			def maxChildJobNum = 25
 			def testSubDirs = []
 			int childJobNum = 1
