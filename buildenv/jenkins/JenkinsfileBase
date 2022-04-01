@@ -697,6 +697,7 @@ def post(output_name) {
 			archiveFile("aqa-tests/TKG/SHA.txt")
 			archiveFile("aqa-tests/TKG/AQACert.log")
 			archiveFile("**/*.tap")
+			getArtifacts()
 
 			if (env.BUILD_LIST.startsWith('jck')) {
 				xunit (
@@ -1026,6 +1027,7 @@ def run_parallel_tests() {
 					currentBuild.result = buildResult
 				}
 				archiveFile("**/*.tap")
+				def files = build.getArtifacts()
 				addFailedTestsGrinderLink()
 			}
 		}

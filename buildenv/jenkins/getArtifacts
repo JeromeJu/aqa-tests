@@ -1,0 +1,30 @@
+"#!groovy
+
+given the name/id of a pipeline job can fetch all the artifacts 
+from all of the jobs in a pipeline from top-level parent 
+all the way down and then zip those files up.
+
+https://stackoverflow.com/questions/39960198/how-can-i-access-artifacts-created-by-jenkins-in-the-lastsuccessfulbuild-through
+
+def getArtifacts(JOB_NAME) {
+     stage('Get Artifacts') {
+          def TIME_LIMIT = params.TIME_LIMIT ? params.TIME_LIMIT.toInteger() : 30
+               timeout(time: TIME_LIMIT, unit: 'MINUTES') {
+}
+def call(args) {
+    def build = args.build
+    def regex = args.regex
+    def files = build.getArtifacts()
+    Map<String, String> artifactNameToContent = [:]
+    for (int i = 0; i < files.size(); i++) {
+        def f = files[i]
+        if (f.name ==~ regex) {
+            String artifactName = f.relativePath
+            String artifactVirtualFile = build.getArtifactManager().root().child(artifactName)
+            String artifactContent = getVirtualFileConent(artifactVirtualFile)
+            artifactNameToContent.put(artifactName, artifactContent)
+
+        }
+    }
+step([$class: 'ArtifactArchiver', artifacts: '**/build/outputs/apk/*.apk', fingerprint: false])
+"
