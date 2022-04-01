@@ -131,6 +131,10 @@ def setupEnv() {
 def setupParallelEnv() {
 	stage('setupParallelEnv') {
 		timestamps{
+			echo UPSTREAM_JOB_NUMBER
+			def files = UPSTREAM_JOB_NAME.getArtifacts()
+			echo files
+			
 			def maxChildJobNum = 25
 			def testSubDirs = []
 			int childJobNum = 1
@@ -1027,9 +1031,6 @@ def run_parallel_tests() {
 					currentBuild.result = buildResult
 				}
 				archiveFile("**/*.tap")
-				echo UPSTREAM_JOB_NUMBER
-				def files = UPSTREAM_JOB_NAME.getArtifacts()
-				echo files
 				addFailedTestsGrinderLink()
 			}
 		}
