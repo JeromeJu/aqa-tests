@@ -522,7 +522,6 @@ def testGetParentBuild(){
 	sshagent(credentials:["${params.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
 		// Get Parent Build
 		def parentURL = "https://ci.adoptopenjdk.net/job/build-scripts/job/openjdk18-pipeline/153/"
-		echo currentBuild
 		echo parentURL
 		def causes = currentBuild.rawBuild.getCauses()
 		for(cause in causes) {
