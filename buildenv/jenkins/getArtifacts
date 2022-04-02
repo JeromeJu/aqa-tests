@@ -6,7 +6,7 @@ all the way down and then zip those files up.
 
 https://stackoverflow.com/questions/39960198/how-can-i-access-artifacts-created-by-jenkins-in-the-lastsuccessfulbuild-through
 
-def getArtifacts(JOB_NAME) {
+def getArtifacts(JOB_NAME, JOB_ID, JOB_CREDENTIALS) {
      stage('Get Artifacts') {
           def TIME_LIMIT = params.TIME_LIMIT ? params.TIME_LIMIT.toInteger() : 30
                timeout(time: TIME_LIMIT, unit: 'MINUTES') {

@@ -81,9 +81,8 @@ def setupEnv() {
 
 	ITERATIONS = params.ITERATIONS ? "${params.ITERATIONS}".toInteger() : 1
 
+	echo "TESTING"
 	echo UPSTREAM_JOB_NUMBER
-	def files = currentBuild.getArtifacts()
-	echo files
 
 	if (params.CODE_COVERAGE) {
 		// GCOV strips # num from folder path in BUILD pipeline, e.g., /home/jenkins/workspace/Build_JDK11_x86-64_linux_Personal/build/linux-x86_64-normal-server-release/vm
