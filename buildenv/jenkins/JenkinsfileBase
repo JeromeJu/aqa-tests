@@ -530,6 +530,7 @@ def testGetParentBuild(){
 			} else {
 				println "Root cause : " + cause.toString()
 			}
+		}
 	}
 }
 
