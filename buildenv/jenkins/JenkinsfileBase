@@ -84,11 +84,7 @@ def setupEnv() {
 	echo "TESTING"
 	echo UPSTREAM_JOB_NUMBER
 	stage('find upstream job') {
-		steps {
-			script {
-				testGetParentBuild()
-			}
-		}
+		testGetParentBuild()
 	}
 
 	if (params.CODE_COVERAGE) {
