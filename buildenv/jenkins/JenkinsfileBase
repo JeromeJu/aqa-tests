@@ -531,10 +531,11 @@ def testGetParentBuild(){
 	withCredentials(credentials:["${env.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
 		def causes = currentBuild.rawBuild.getCauses()
 		for(cause in causes) {
-		if (cause.class.toString().contains("UpstreamCause")) {
-			println "This job was caused by job " + cause.upstreamProject
-		} else {
-			println "Root cause : " + cause.toString()
+			if (cause.class.toString().contains("UpstreamCause")) {
+				println "This job was caused by job " + cause.upstreamProject
+			} else {
+				println "Root cause : " + cause.toString()
+			}
 		}
 	}
 }
