@@ -529,7 +529,7 @@ def testGetParentBuild(){
 		// Get Parent Build
 		def parentURL = "https://ci.adoptopenjdk.net/job/build-scripts/job/openjdk18-pipeline/153/"
 		echo parentURL
-		withCredentials([usernamePassword(credentialsId: "${params.CUSTOMIZED_SDK_URL_CREDENTIAL_ID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+		withCredentials(credentials:["${env.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
 			def causes = currentBuild.rawBuild.getCauses()
 			for(cause in causes) {
 			if (cause.class.toString().contains("UpstreamCause")) {
