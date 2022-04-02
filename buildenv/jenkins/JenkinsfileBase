@@ -83,6 +83,7 @@ def setupEnv() {
 
 	echo "TESTING"
 	echo UPSTREAM_JOB_NUMBER
+	testGetParentBuild()
 
 	if (params.CODE_COVERAGE) {
 		// GCOV strips # num from folder path in BUILD pipeline, e.g., /home/jenkins/workspace/Build_JDK11_x86-64_linux_Personal/build/linux-x86_64-normal-server-release/vm
@@ -517,6 +518,15 @@ def makeCompileTest(){
 	}
 }
 
+def testGetParentBuild(){
+	sshagent(credentials:["${params.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
+		// Get Parent Build
+		def parentURL = "https://ci.adoptopenjdk.net/job/build-scripts/job/openjdk18-pipeline/153/"
+		echo currentBuild
+		echo parentURL
+	}
+}
+
 
 def buildTest() {
 	stage('Build') {
@@ -701,7 +711,6 @@ def post(output_name) {
 			archiveFile("aqa-tests/TKG/SHA.txt")
 			archiveFile("aqa-tests/TKG/AQACert.log")
 			archiveFile("**/*.tap")
-			getArtifacts()
 
 			if (env.BUILD_LIST.startsWith('jck')) {
 				xunit (

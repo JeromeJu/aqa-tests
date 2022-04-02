@@ -1,10 +1,12 @@
-"#!groovy
+#!groovy
 
 given the name/id of a pipeline job can fetch all the artifacts 
 from all of the jobs in a pipeline from top-level parent 
 all the way down and then zip those files up.
 
-https://stackoverflow.com/questions/39960198/how-can-i-access-artifacts-created-by-jenkins-in-the-lastsuccessfulbuild-through
+// https://stackoverflow.com/questions/39960198/how-can-i-access-artifacts-created-by-jenkins-in-the-lastsuccessfulbuild-through
+
+def TEST_JOB_URL = "https://ci.adoptopenjdk.net/job/build-scripts/job/openjdk18-pipeline/153/"
 
 def getArtifacts(JOB_NAME, JOB_ID, JOB_CREDENTIALS) {
      stage('Get Artifacts') {
@@ -26,5 +28,4 @@ def call(args) {
 
         }
     }
-step([$class: 'ArtifactArchiver', artifacts: '**/build/outputs/apk/*.apk', fingerprint: false])
-"
+// step([$class: 'ArtifactArchiver', artifacts: '**/build/outputs/apk/*.apk', fingerprint: false])
