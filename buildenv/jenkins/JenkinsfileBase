@@ -81,9 +81,8 @@ def setupEnv() {
 
 	ITERATIONS = params.ITERATIONS ? "${params.ITERATIONS}".toInteger() : 1
 
-	echo "TESTING"
-	echo UPSTREAM_JOB_NUMBER
 	stage('find upstream job') {
+		echo "TESTING"
 		testGetParentBuild()
 	}
 
