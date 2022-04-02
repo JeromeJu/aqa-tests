@@ -522,18 +522,26 @@ def makeCompileTest(){
 def testGetParentBuild(){
 	// Get Parent Build
 	def parentURL = "https://ci.adoptopenjdk.net/job/build-scripts/job/openjdk18-pipeline/153/"
-	echo parentURL
-	// withCredentials(credentials:["${env.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
-	sshagent(credentials:["${params.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
-		def causes = currentBuild.rawBuild.getCauses()
-		for(cause in causes) {
-			if (cause.class.toString().contains("UpstreamCause")) {
-				println "This job was caused by job " + cause.upstreamProject
-			} else {
-				println "Root cause : " + cause.toString()
-			}
+	echo "testing"
+	def causes = currentBuild.rawBuild.getCauses()
+	for(cause in causes) {
+		if (cause.class.toString().contains("UpstreamCause")) {
+			println "This job was caused by job " + cause.upstreamProject
+		} else {
+			println "Root cause : " + cause.toString()
 		}
 	}
+	// withCredentials(credentials:["${env.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
+	// sshagent(credentials:["${params.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
+	// 	def causes = currentBuild.rawBuild.getCauses()
+	// 	for(cause in causes) {
+	// 		if (cause.class.toString().contains("UpstreamCause")) {
+	// 			println "This job was caused by job " + cause.upstreamProject
+	// 		} else {
+	// 			println "Root cause : " + cause.toString()
+	// 		}
+	// 	}
+	// }
 }
 
 
