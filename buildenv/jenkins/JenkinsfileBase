@@ -83,7 +83,13 @@ def setupEnv() {
 
 	echo "TESTING"
 	echo UPSTREAM_JOB_NUMBER
-	testGetParentBuild()
+	stage('find upstream job') {
+		steps {
+			script {
+				testGetParentBuild()
+			}
+		}
+	}
 
 	if (params.CODE_COVERAGE) {
 		// GCOV strips # num from folder path in BUILD pipeline, e.g., /home/jenkins/workspace/Build_JDK11_x86-64_linux_Personal/build/linux-x86_64-normal-server-release/vm
@@ -519,12 +525,13 @@ def makeCompileTest(){
 }
 
 def testGetParentBuild(){
-	sshagent(credentials:["${params.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
+	sshagent(credentials:["${env.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
 		// Get Parent Build
 		def parentURL = "https://ci.adoptopenjdk.net/job/build-scripts/job/openjdk18-pipeline/153/"
 		echo parentURL
-		def causes = currentBuild.rawBuild.getCauses()
-		for(cause in causes) {
+		withCredentials([usernamePassword(credentialsId: "${params.CUSTOMIZED_SDK_URL_CREDENTIAL_ID}", usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+			def causes = currentBuild.rawBuild.getCauses()
+			for(cause in causes) {
 			if (cause.class.toString().contains("UpstreamCause")) {
 				println "This job was caused by job " + cause.upstreamProject
 			} else {
