@@ -29,3 +29,46 @@ def call(args) {
         }
     }
 // step([$class: 'ArtifactArchiver', artifacts: '**/build/outputs/apk/*.apk', fingerprint: false])
+
+
+
+// Child 
+// https://stackoverflow.com/questions/57909647/how-to-copy-artifacts-from-parallel-child-jobs
+
+pipeline {
+    environment {
+        childJobName = "Testing/MyChildJob"
+    }
+    stages {
+        stage('Child Jobs') {
+            parallel {
+                stage('ChildJob1') {
+                    steps {
+                        runJob(childJobName, '@tag1 @tag2', 'job1')
+                    }
+                }
+                stage('ChildJob2') {
+                    steps {
+                        runJob(childJobName, '@tag3 @tag4', 'job2')
+                    }
+                }
+            }
+        }
+    }
+    post {
+        cleanup{
+            cleanWs()
+        }
+    }
+}
+
+def runJob(String jobName, String tags, String rootReportDir) {
+
+    def childJob = build job: jobName, propagate: false, wait: true, parameters: [string(name: 'TAGS', value: tags)]
+    copyArtifacts filter: "report.html", projectName: jobName, selector: specific("${childJob.number}"), target: rootReportDir
+    archiveArtifacts artifacts: "${rootReportDir}/report.html"
+
+    if (childJob.result == "FAILURE") {
+        bat "exit 1"
+    }
+}

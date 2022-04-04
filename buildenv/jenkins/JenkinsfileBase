@@ -81,9 +81,9 @@ def setupEnv() {
 
 	ITERATIONS = params.ITERATIONS ? "${params.ITERATIONS}".toInteger() : 1
 
-	stage('find upstream job') {
+	stage('find child job artifcats') {
 		echo "TESTING"
-		testGetParentBuild()
+		testGetChildBuild()
 	}
 
 	if (params.CODE_COVERAGE) {
@@ -517,6 +517,12 @@ def makeCompileTest(){
 			sh "$makeTestCmd";
 		}
 	}
+}
+
+def testGetChildBuild(){
+	// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"${name}/${buildId}")
+	copyArtifacts (projectName: "openjdk18-pipeline", selector: specific("153"), filter: "**/*.tap")
+
 }
 
 def testGetParentBuild(){
