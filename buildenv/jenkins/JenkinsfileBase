@@ -525,6 +525,17 @@ def testGetChildBuild(){
 	def testURL = "Test_openjdk18_hs_extended.openjdk_ppc64le_linux_testList_0"
 	def testNum = "29"
 	copyArtifacts (projectName: testURL, selector: specific(testNum), filter: "**/*.tap", target: 'aqa-tests/TKG/')
+	
+	for (job in Hudson.instance.getAllItems(hudson.model.Job)) {
+		for (run in job.getBuilds()) {
+			cause = run.getCause(Cause.UpstreamCause)
+			if ((cause) && (cause.pointsTo(mainBuild))) {
+				println "Downstream for " + mainBuild.getFullDisplayName() + " is " + run.getFullDisplayName()
+			}
+		}
+	}
+	// TODO: get all child
+
 }
 
 def testGetParentBuild(){
