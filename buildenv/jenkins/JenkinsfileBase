@@ -514,10 +514,17 @@ def makeCompileTest(){
 	}
 }
 
+def getAllArtifacts(){
+	testGetChildBuild()
+	// testGetParentBuild()
+	archiveFile("**/*.tap")
+}
+
 def testGetChildBuild(){
 	// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"${name}/${buildId}")
-	copyArtifacts (projectName: "Test_openjdk18_hs_extended.openjdk_ppc64le_linux_testList_0", selector: specific("29"), filter: "**/*.tap", target: 'aqa-tests/TKG/')
-	archiveFile("**/*.tap")
+	def testURL = "Test_openjdk18_hs_extended.openjdk_ppc64le_linux_testList_0"
+	def testNum = "29"
+	copyArtifacts (projectName: testURL, selector: specific(testNum), filter: "**/*.tap", target: 'aqa-tests/TKG/')
 }
 
 def testGetParentBuild(){
