@@ -523,15 +523,16 @@ def getAllArtifacts(){
 
 def testGetChildBuild(){
 	// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"${name}/${buildId}")
-	def testURL = "Test_openjdk18_hs_extended.openjdk_ppc64le_linux_testList_0"
-	def testNum = "29"
+	// def testURL = "Test_openjdk18_hs_extended.openjdk_ppc64le_linux_testList_0"
+	// def testNum = "29"
+	def testURL = "openjdk18-pipeline"
+	def testNum = "153"
 	copyArtifacts (projectName: testURL, selector: specific(testNum), filter: "**/*.tap", target: 'aqa-tests/Artifacts/')
-
 	// for (job in Hudson.instance.getAllItems(hudson.model.Job)) {
 	// 	for (run in job.getBuilds()) {
 	// 		cause = run.getCause(Cause.UpstreamCause)
-	// 		if ((cause) && (cause.pointsTo(mainBuild))) {
-	// 			println "Downstream for " + mainBuild.getFullDisplayName() + " is " + run.getFullDisplayName()
+	// 		if ((cause) && (cause.pointsTo(currentBuild))) {
+	// 			echo run
 	// 		}
 	// 	}
 	// }
