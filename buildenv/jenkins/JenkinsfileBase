@@ -521,7 +521,7 @@ def makeCompileTest(){
 
 def testGetChildBuild(){
 	// copyArtifacts (projectName: "${name}", selector: specific("${buildId}"), filter: "**/*.tap", target:"${name}/${buildId}")
-	copyArtifacts (projectName: "openjdk18-pipeline", selector: specific("153"), filter: "**/*.tap")
+	copyArtifacts (projectName: "Test_openjdk18_hs_extended.openjdk_ppc64le_linux_testList_0", selector: specific("29"), filter: "**/*.tap")
 
 }
 
