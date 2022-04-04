@@ -816,7 +816,7 @@ def post(output_name) {
 
 	stage('find child job artifcats') {
 		echo "TESTING"
-		testGetChildBuild()
+		getAllArtifacts()
 	}
 }
 
