@@ -527,7 +527,9 @@ def testGetChildBuild(){
 	// def testNum = "29"
 	def testURL = "openjdk18-pipeline"
 	def testNum = "153"
-	copyArtifacts (projectName: testURL, selector: specific(testNum), filter: "**/*.tap", target: 'aqa-tests/Artifacts/')
+	sshagent(credentials:["${params.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
+		copyArtifacts (projectName: testURL, selector: specific(testNum), filter: "**/*.tap", target: 'aqa-tests/Artifacts/')
+	}
 	// for (job in Hudson.instance.getAllItems(hudson.model.Job)) {
 	// 	for (run in job.getBuilds()) {
 	// 		cause = run.getCause(Cause.UpstreamCause)
@@ -542,8 +544,9 @@ def testGetChildBuild(){
 
 def testGetParentBuild(){
 	// Get Parent Build
-	def parentURL = "https://ci.adoptopenjdk.net/job/build-scripts/job/openjdk18-pipeline/153/"
-	echo "testing"
+	def testURL = "openjdk18-pipeline"
+	def testNum = "153"
+
 	def causes = currentBuild.rawBuild.getCauses()
 	for(cause in causes) {
 		if (cause.class.toString().contains("UpstreamCause")) {
