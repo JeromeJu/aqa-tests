@@ -1,0 +1,60 @@
+#!groovy
+
+given the name/id of a pipeline job can fetch all the artifacts 
+from all of the jobs in a pipeline from top-level parent 
+all the way down and then zip those files up.
+
+// https://stackoverflow.com/questions/39960198/how-can-i-access-artifacts-created-by-jenkins-in-the-lastsuccessfulbuild-through
+
+def TEST_TOPLVL_NAME = "openjdk18-pipeline"
+def TEST_TOPLVL_ID = "153"
+
+def TEST_TOPLVL_NAME = "openjdk18-pipeline"
+def TEST_TOPLVL_ID = "153"
+
+def TEST_LVL3_NAME = "Test_openjdk18_hs_extended.openjdk_ppc64le_linux_testList_0/"
+
+def getAllArtifacts(JOB_NAME, JOB_ID, JOB_CREDENTIALS){
+	getChildArtifacts(JOB_NAME, JOB_ID, JOB_CREDENTIALS)
+	getParentArtifacts(JOB_NAME, JOB_ID, JOB_CREDENTIALS)
+	// archiveFile("**/*.tap")
+	zip zipFile: 'artifacts.zip', archive: true, glob: "aqa-tests/Artifacts/**/*.tap"
+}
+
+// TODO1 get current job
+
+def getChildArtifacts(JOB_NAME, JOB_ID, JOB_CREDENTIALS){
+	// TODO: get all child
+	// for (job in Hudson.instance.getAllItems(hudson.model.Job)) {
+	// 	for (run in job.getBuilds()) {
+	// 		cause = run.getCause(Cause.UpstreamCause)
+	// 		if ((cause) && (cause.pointsTo(currentBuild))) {
+	// 			echo run
+	// 		}
+	copyArtifacts (projectName: testURL, selector: specific(testNum), filter: "**/*.tap", target: 'aqa-tests/Artifacts/')
+	// 	}
+	// }
+
+}
+
+def getParentArtifacts(JOB_NAME, JOB_ID, JOB_CREDENTIALS){
+	def causes = currentBuild.rawBuild.getCauses()
+	for(cause in causes) {
+		if (cause.class.toString().contains("UpstreamCause")) {
+			println "This job was caused by job " + cause.upstreamProject
+		} else {
+			println "Root cause : " + cause.toString()
+		}
+	}
+	// withCredentials(credentials:["${env.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
+	// sshagent(credentials:["${params.USER_CREDENTIALS_ID}"], ignoreMissing: true) {
+	// 	def causes = currentBuild.rawBuild.getCauses()
+	// 	for(cause in causes) {
+	// 		if (cause.class.toString().contains("UpstreamCause")) {
+	// 			println "This job was caused by job " + cause.upstreamProject
+	// 		} else {
+	// 			println "Root cause : " + cause.toString()
+	// 		}
+	// 	}
+	// }
+}
